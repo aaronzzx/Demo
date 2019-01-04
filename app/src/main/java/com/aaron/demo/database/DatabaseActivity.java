@@ -20,9 +20,11 @@ import java.util.Date;
 
 public class DatabaseActivity extends AppCompatActivity implements View.OnClickListener {
 
+    // 控件
     private EditText mInput_edit;
     private TextView mDisplay_text;
     private Button mInsert_btn, mCommit_btn, mQuery_btn, mClear_btn;
+    // 事务
     private SQLiteDatabase mDatabase;
     private ContentValues mContentValues;
     private DatabaseUser mDatabaseUser;
