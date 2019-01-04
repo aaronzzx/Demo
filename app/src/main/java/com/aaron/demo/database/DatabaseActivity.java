@@ -96,7 +96,7 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
             if (raw.equals("标题")) {
                 mContentValues.put("title", content);
             } else {
-                mContentValues.put("content", content);
+                mContentValues.put("content", args);
             }
             Toast.makeText(DatabaseActivity.this, "组装成功",
                     Toast.LENGTH_SHORT).show();
