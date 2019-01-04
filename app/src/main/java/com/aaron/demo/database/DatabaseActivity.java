@@ -2,20 +2,17 @@ package com.aaron.demo.database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aaron.demo.MainActivity;
 import com.aaron.demo.R;
 
 import java.text.SimpleDateFormat;
@@ -98,7 +95,7 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
             String content = args.substring(2);
             if (raw.equals("标题")) {
                 mContentValues.put("title", content);
-            } else if (raw.equals("内容")) {
+            } else {
                 mContentValues.put("content", content);
             }
             Toast.makeText(DatabaseActivity.this, "组装成功",
