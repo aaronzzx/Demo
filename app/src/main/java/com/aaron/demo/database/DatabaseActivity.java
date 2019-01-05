@@ -62,6 +62,9 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * 初始化控件
+     */
     private void initView() {
         mInput_edit = findViewById(R.id.edit_text);
         mDisplay_text = findViewById(R.id.text_view);
@@ -70,12 +73,18 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         mClear_btn = findViewById(R.id.btn_clear);
     }
 
+    /**
+     * 设置点击监听器
+     */
     private void setClickListener() {
         mInsert_btn.setOnClickListener(this);
         mQuery_btn.setOnClickListener(this);
         mClear_btn.setOnClickListener(this);
     }
 
+    /**
+     * 初始化数据库事务
+     */
     private void initTransaction() {
         MyDatabaseHelper databaseHelper = new MyDatabaseHelper(this,
                 "Note.db", null, 1);
