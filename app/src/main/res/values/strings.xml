@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Demo</string>
     <string name="btn_database">数据库示例</string>
-    <string name="btn_insert">组装数据</string>
-    <string name="btn_commit">提交数据</string>
+    <string name="btn_insert">插入数据</string>
     <string name="btn_query">查询数据</string>
     <string name="btn_clear">清除数据</string>
-    <string name="database_hint">输入格式：{标题或内容}开始输入</string>
+    <string name="database_hint">保存点什么</string>
 </resources>

@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import com.aaron.demo.R;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,7 +27,7 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
     // 控件
     private EditText mInput_edit;
     private TextView mDisplay_text;
-    private Button mInsert_btn, mCommit_btn, mQuery_btn, mClear_btn;
+    private Button mInsert_btn, mQuery_btn, mClear_btn;
     // 事务
     private SQLiteDatabase mDatabase;
     private ContentValues mContentValues;
@@ -43,10 +47,11 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         String args = mInput_edit.getText().toString();
         switch (v.getId()) {
             case R.id.btn_insert: // 组装数据
-                mDatabaseUser.insertData(args);
-                break;
-            case R.id.btn_commit: // 提交数据
-                mDatabaseUser.commitData();
+                try {
+                    mDatabaseUser.insertData(args);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.btn_query: // 查询数据
                 mDatabaseUser.queryData(args);
@@ -61,14 +66,12 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         mInput_edit = findViewById(R.id.edit_text);
         mDisplay_text = findViewById(R.id.text_view);
         mInsert_btn = findViewById(R.id.btn_insert);
-        mCommit_btn = findViewById(R.id.btn_commit);
         mQuery_btn = findViewById(R.id.btn_query);
         mClear_btn = findViewById(R.id.btn_clear);
     }
 
     private void setClickListener() {
         mInsert_btn.setOnClickListener(this);
-        mCommit_btn.setOnClickListener(this);
         mQuery_btn.setOnClickListener(this);
         mClear_btn.setOnClickListener(this);
     }
@@ -89,30 +92,21 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
 
     private class DatabaseUser {
 
-        private void insertData(String args) {
+        private void insertData(String args) throws IOException {
             if (TextUtils.isEmpty(args)) {
+                Toast.makeText(DatabaseActivity.this, "请先输入",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
-            String raw = args.substring(0, 2);
-            String content = args.substring(2);
-            if (raw.equals("标题")) {
-                mContentValues.put("title", content);
-            } else {
-                mContentValues.put("content", args);
-            }
-            Toast.makeText(DatabaseActivity.this, "组装成功",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        private void commitData() {
-            if (mContentValues.size() <= 0) {
-                return;
-            }
-            String date = formatDate(new Date());
-            mContentValues.put("date", date);
+            BufferedReader reader = new BufferedReader(new InputStreamReader
+                    (new ByteArrayInputStream(args.getBytes())));
+            String title = reader.readLine();
+            mContentValues.put("title", title); // 标题
+            mContentValues.put("content", args); // 内容
+            mContentValues.put("date", formatDate(new Date())); // 日期
             mDatabase.insert("Note", null, mContentValues);
             mContentValues.clear();
-            Toast.makeText(DatabaseActivity.this, "提交成功",
+            Toast.makeText(DatabaseActivity.this, "插入成功",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -152,13 +146,13 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         private void clearData(String args) {
             if (!TextUtils.isEmpty(args)) {
                 mDatabase.delete("Note", "title = ?", new String[]{args});
+                Toast.makeText(DatabaseActivity.this, "数据清除成功",
+                        Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(DatabaseActivity.this, "操作错误，数据将全部清除",
+                Toast.makeText(DatabaseActivity.this, "数据全部清除成功",
                         Toast.LENGTH_SHORT).show();
                 mDatabase.delete("Note", null, null);
             }
-            Toast.makeText(DatabaseActivity.this, "清除成功",
-                    Toast.LENGTH_SHORT).show();
         }
     }
 }
