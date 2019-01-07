@@ -93,6 +93,9 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         mDatabaseUser = new DatabaseUser();
     }
 
+    /**
+     * 格式化日期
+     */
     @SuppressLint("SimpleDateFormat")
     private String formatDate(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 - HH:mm");
