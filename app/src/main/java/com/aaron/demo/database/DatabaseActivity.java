@@ -1,8 +1,6 @@
 package com.aaron.demo.database;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,12 +13,15 @@ import android.widget.Toast;
 
 import com.aaron.demo.R;
 
+import org.litepal.LitePal;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class DatabaseActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +31,7 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
     private Button mInsert_btn, mQuery_btn, mClear_btn;
     // 事务
     private SQLiteDatabase mDatabase;
-    private ContentValues mContentValues;
+    //    private ContentValues mContentValues;
     private DatabaseUser mDatabaseUser;
 
     @Override
@@ -89,10 +90,11 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
      * 初始化数据库事务
      */
     private void initTransaction() {
-        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(this,
-                "Note.db", null, 1);
-        mDatabase = databaseHelper.getWritableDatabase();
-        mContentValues = new ContentValues();
+//        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(this,
+//                "Note.db", null, 1);
+//        mDatabase = databaseHelper.getWritableDatabase();
+        mDatabase = LitePal.getDatabase();
+//        mContentValues = new ContentValues();
         mDatabaseUser = new DatabaseUser();
     }
 
@@ -116,29 +118,38 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
             BufferedReader reader = new BufferedReader(new InputStreamReader
                     (new ByteArrayInputStream(args.getBytes())));
             String title = reader.readLine();
-            mContentValues.put("title", title); // 标题
-            mContentValues.put("content", args); // 内容
-            mContentValues.put("date", formatDate(new Date())); // 日期
-            mDatabase.insert("Note", null, mContentValues);
-            mContentValues.clear();
-            Toast.makeText(DatabaseActivity.this, "插入成功",
-                    Toast.LENGTH_SHORT).show();
+//            mContentValues.put("title", title); // 标题
+//            mContentValues.put("content", args); // 内容
+//            mContentValues.put("date", formatDate(new Date())); // 日期
+//            mDatabase.insert("Note", null, mContentValues);
+//            mContentValues.clear();
+            Note note = new Note();
+            note.setTitle(title);
+            note.setContent(args.substring(args.indexOf("\n") + 1));
+            note.setDate(formatDate(new Date()));
+            if (note.save()) {
+                Toast.makeText(DatabaseActivity.this, "插入成功",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
 
         private void queryData(String args) {
-            Cursor cursor;
+//            Cursor cursor;
+            List<Note> noteList;
             if (!TextUtils.isEmpty(args)) {
-                cursor = mDatabase.query("Note", null, "title = ?",
-                        new String[]{args}, null, null, null);
+//                cursor = mDatabase.query("Note", null, "title = ?",
+//                        new String[]{args}, null, null, null);
+                noteList = LitePal.where("title = ?", args).find(Note.class);
             } else {
-                cursor = mDatabase.query("Note", null, null,
-                        null, null, null, null);
+//                cursor = mDatabase.query("Note", null, null,
+//                        null, null, null, null);
+                noteList = LitePal.findAll(Note.class);
             }
             StringBuilder text = new StringBuilder();
-            while (cursor.moveToNext()) {
-                String title = cursor.getString(cursor.getColumnIndex("title"));
-                String content = cursor.getString(cursor.getColumnIndex("content"));
-                String date = cursor.getString(cursor.getColumnIndex("date"));
+            for (Note note : noteList) {
+                String title = note.getTitle();
+                String content = note.getContent();
+                String date = note.getDate();
                 if (!TextUtils.isEmpty(title)) {
                     text.append(title);
                 }
@@ -146,27 +157,42 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
                     text.append("\n\n").append(content);
                 }
                 if (!TextUtils.isEmpty(date)) {
-                    text.append("\n\n").append(date).append("\n-----------------------------\n\n");
+                    text.append("\n\n").append(date).append("\n--------------------------------------\n\n");
                 }
             }
+//            while (cursor.moveToNext()) {
+//                String title = cursor.getString(cursor.getColumnIndex("title"));
+//                String content = cursor.getString(cursor.getColumnIndex("content"));
+//                String date = cursor.getString(cursor.getColumnIndex("date"));
+//                if (!TextUtils.isEmpty(title)) {
+//                    text.append(title);
+//                }
+//                if (!TextUtils.isEmpty(content)) {
+//                    text.append("\n\n").append(content);
+//                }
+//                if (!TextUtils.isEmpty(date)) {
+//                    text.append("\n\n").append(date).append("\n-----------------------------\n\n");
+//                }
+//            }
             String data = text.toString();
             if (!TextUtils.isEmpty(data)) {
                 mDisplay_text.setText(data);
                 Toast.makeText(DatabaseActivity.this, "查询成功",
                         Toast.LENGTH_SHORT).show();
             }
-            cursor.close();
+//            cursor.close();
         }
 
         private void clearData(String args) {
             if (!TextUtils.isEmpty(args)) {
-                mDatabase.delete("Note", "title = ?", new String[]{args});
+//                mDatabase.delete("Note", "title = ?", new String[]{args});
+                LitePal.deleteAll(Note.class, "title = ?", args);
                 Toast.makeText(DatabaseActivity.this, "数据清除成功",
                         Toast.LENGTH_SHORT).show();
             } else {
+                LitePal.deleteAll(Note.class);
                 Toast.makeText(DatabaseActivity.this, "数据全部清除成功",
                         Toast.LENGTH_SHORT).show();
-                mDatabase.delete("Note", null, null);
             }
         }
     }

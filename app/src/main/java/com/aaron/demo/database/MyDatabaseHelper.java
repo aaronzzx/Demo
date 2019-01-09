@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+/**
+ * 原始风格创建数据库
+ */
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context mContext;
