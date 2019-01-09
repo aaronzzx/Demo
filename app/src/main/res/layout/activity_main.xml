@@ -4,16 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <Button
             android:id="@+id/btn_database"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_database"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    <Button
+        android:id="@+id/btn_content_provider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_content_provider" />
 
 </LinearLayout>

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aaron.demo">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -19,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".database.DatabaseActivity"></activity>
+        <activity android:name=".database.DatabaseActivity" />
+        <activity android:name=".content_provider.ProviderActivity"></activity>
     </application>
 
 </manifest>

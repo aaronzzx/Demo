@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Demo</string>
     <string name="btn_database">数据库示例</string>
+    <string name="btn_content_provider">内容提供器示例</string>
     <string name="btn_insert">插入数据</string>
     <string name="btn_query">查询数据</string>
     <string name="btn_clear">清除数据</string>
