@@ -42,6 +42,9 @@ public class DatabaseActivity extends AppCompatActivity implements View.OnClickL
         setClickListener(); // 设置点击监听器
     }
 
+    /**
+     * 点击响应
+     */
     @Override
     public void onClick(View v) {
         String args = mInput_edit.getText().toString();
