@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.aaron.demo.content_provider.ProviderActivity;
+import com.aaron.demo.custom_view.CustomViewActivity;
 import com.aaron.demo.database.DatabaseActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mDatabase_btn, mContentProvider;
+    private Button mDatabase_btn, mContentProvider, mCustomView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +31,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_content_provider: // 内容提供器示例
                 startActivity(ProviderActivity.class);
                 break;
+            case R.id.btn_custom_view: // 自定义View示例
+                startActivity(CustomViewActivity.class);
+                break;
         }
     }
 
     private void initView() {
         mDatabase_btn = findViewById(R.id.btn_database);
         mContentProvider = findViewById(R.id.btn_content_provider);
+        mCustomView = findViewById(R.id.btn_custom_view);
     }
 
     private void setClickListener() {
         mDatabase_btn.setOnClickListener(this);
         mContentProvider.setOnClickListener(this);
+        mCustomView.setOnClickListener(this);
     }
 
     private void startActivity(Class clazz) {

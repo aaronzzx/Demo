@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".database.DatabaseActivity" />
-        <activity android:name=".content_provider.ProviderActivity"></activity>
+        <activity android:name=".content_provider.ProviderActivity" />
+        <activity android:name=".custom_view.CustomViewActivity"></activity>
     </application>
 
 </manifest>
