@@ -47,7 +47,7 @@ public class ShaderTextView extends TextView {
             }
             mGradientMatrix.setTranslate(mTranslate, 0);
             mLinearGradient.setLocalMatrix(mGradientMatrix);
-            postInvalidateDelayed(100);
+            postInvalidateDelayed(300);
         }
     }
 
@@ -61,7 +61,7 @@ public class ShaderTextView extends TextView {
         if (mViewWidth > 0) {
             Paint paint = getPaint();
             mLinearGradient = new LinearGradient(0, 0, mViewWidth, 0,
-                    new int[]{Color.RED, Color.WHITE, Color.BLUE}, new float[]{0.1F, 0.8F, 0.1F},
+                    new int[]{Color.RED, Color.GREEN, Color.BLUE}, null,
                     Shader.TileMode.CLAMP);
             paint.setShader(mLinearGradient);
             mGradientMatrix = new Matrix();
