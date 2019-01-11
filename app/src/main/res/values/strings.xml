@@ -7,4 +7,7 @@
     <string name="btn_query">查询数据</string>
     <string name="btn_clear">清除数据</string>
     <string name="database_hint">保存点什么</string>
+    <string name="top_bar_title">TopBar</string>
+    <string name="top_bar_left">Left</string>
+    <string name="top_bar_right">Right</string>
 </resources>
