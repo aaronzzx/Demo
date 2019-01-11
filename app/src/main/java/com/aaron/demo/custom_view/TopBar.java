@@ -17,7 +17,7 @@ public class TopBar extends RelativeLayout {
 
     private static final String TAG = "TopBar";
 
-    private TypedArray mTypedArray;
+    private TypedArray mTypedArray; // 用于从中取出 View 的属性
 
     private String mTitle;
     private float mTitleTextSize;
@@ -59,11 +59,6 @@ public class TopBar extends RelativeLayout {
         initView(context);
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
-
     private void initView(Context context) {
         mTitleView = new TextView(context);
         mLeftButton = new Button(context);
@@ -71,7 +66,6 @@ public class TopBar extends RelativeLayout {
 
         // 为创建的组件元素赋值，
         // 值来源于在引用的 xml 文件中给对应属性的赋值
-
         mLeftButton.setText(mLeftText);
         mLeftButton.setTextColor(mLeftTextColor);
         mLeftButton.setBackground(mLeftBackground);
@@ -130,19 +124,11 @@ public class TopBar extends RelativeLayout {
         mTypedArray.recycle();
     }
 
-    public void setButtonVisible(int id, boolean flag) {
-        if (flag) {
-            if (id == 0) {
-                mLeftButton.setVisibility(VISIBLE);
-            } else {
-                mRightButton.setVisibility(VISIBLE);
-            }
+    public void setButtonVisible(boolean visible) {
+        if (visible) {
+            mTitleView.setVisibility(VISIBLE);
         } else {
-            if (id == 0) {
-                mLeftButton.setVisibility(GONE);
-            } else {
-                mRightButton.setVisibility(GONE);
-            }
+            mTitleView.setVisibility(GONE);
         }
     }
 
