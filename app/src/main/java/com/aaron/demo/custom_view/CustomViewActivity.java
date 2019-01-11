@@ -12,6 +12,10 @@ public class CustomViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_view);
+        setTopbar();
+    }
+
+    private void setTopbar() {
         TopBar topBar = findViewById(R.id.top_bar);
         topBar.setTopbarOnClickListener(new TopBar.OnClickListener() {
             @Override
