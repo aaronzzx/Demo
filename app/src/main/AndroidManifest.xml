@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".database.DatabaseActivity" />
         <activity android:name=".content_provider.ProviderActivity" />
-        <activity android:name=".custom_view.CustomViewActivity"></activity>
+        <activity android:name=".custom_view.CustomViewActivity" />
+        <activity android:name=".custom_view.CustomView2Activity"></activity>
     </application>
 
 </manifest>

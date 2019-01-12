@@ -1,7 +1,9 @@
 package com.aaron.demo.custom_view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.aaron.demo.R;
@@ -13,6 +15,14 @@ public class CustomViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_view);
         setTopbar();
+        initView();
+    }
+
+    private void initView() {
+        Button first = findViewById(R.id.btn_first);
+        first.setOnClickListener(v -> {
+            startActivity(new Intent(CustomViewActivity.this, CustomView2Activity.class));
+        });
     }
 
     private void setTopbar() {
