@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class DragView extends View {
 
@@ -38,6 +39,7 @@ public class DragView extends View {
                 // method 1
 //                mLastX = x;
 //                mLastY = y;
+
                 // method 2
                 mLastX = rawX;
                 mLastY = rawY;
@@ -48,11 +50,32 @@ public class DragView extends View {
 //                int offsetY = y - mLastY;
 //                layout(getLeft() + offsetX, getTop() + offsetY,
 //                        getRight() + offsetX, getBottom() + offsetY);
+
                 // method 2
                 int offsetX = rawX - mLastX;
                 int offsetY = rawY - mLastY;
-                layout(getLeft() + offsetX, getTop() + offsetY,
-                        getRight() + offsetX, getBottom() + offsetY);
+
+                // method 3,同时对上下或者左右进行偏移
+//                offsetLeftAndRight(offsetX);
+//                offsetTopAndBottom(offsetY);
+
+                // method 4,通过 LayoutParams 进行偏移，前提是需要有父布局，不然
+                // 无法获取 LayoutParams，并且需要根据父布局类型转换类型，
+                // 如 LinearLayout 或 RelativeLayout
+//                LinearLayout.LayoutParams layoutParams =
+//                        (LinearLayout.LayoutParams) getLayoutParams();
+//                layoutParams.leftMargin = getLeft() + offsetX;
+//                layoutParams.topMargin = getTop() + offsetY;
+//                setLayoutParams(layoutParams);
+
+                // method 5，通过 ViewGroup.MarginLayoutParams 实现更加方便，
+                // 不必考虑父布局类型，和 method 4 的本质一样
+                ViewGroup.MarginLayoutParams layoutParams =
+                        (ViewGroup.MarginLayoutParams) getLayoutParams();
+                layoutParams.leftMargin = getLeft() + offsetX;
+                layoutParams.topMargin = getTop() + offsetY;
+                setLayoutParams(layoutParams);
+
                 // 如果在执行完 ACTION_MOVE 后不重置初始坐标，会出现无法精准获取 View 偏移量
                 mLastX = rawX;
                 mLastY = rawY;
