@@ -20,8 +20,12 @@ public class CustomViewActivity extends AppCompatActivity {
 
     private void initView() {
         Button first = findViewById(R.id.btn_first);
+        Button second = findViewById(R.id.btn_second);
         first.setOnClickListener(v -> {
             startActivity(new Intent(CustomViewActivity.this, CustomView2Activity.class));
+        });
+        second.setOnClickListener(v -> {
+            startActivity(new Intent(CustomViewActivity.this, CustomView3Activity.class));
         });
     }
 

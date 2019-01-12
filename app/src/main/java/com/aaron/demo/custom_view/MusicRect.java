@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class MusicRect extends View {
@@ -53,9 +54,9 @@ public class MusicRect extends View {
             float right = (float) (mViewWidth * 0.4 / 2 + mRectWidth * (i + 1));
 //            Log.d(TAG, "mWidth: " + mWidth * 0.4 / 2);
 //            Log.d(TAG, "mViewHeight: " + mViewHeight);
-//            Log.d(TAG, "left: " + left);
+            Log.d(TAG, "left: " + left);
+            Log.d(TAG, "right: " + right);
 //            Log.d(TAG, "top: " + currentHeight);
-//            Log.d(TAG, "right: " + right);
 //            Log.d(TAG, "bottom: " + mViewHeight);
             canvas.drawRect(left, currentHeight, right, mViewHeight, mPaint);
         }

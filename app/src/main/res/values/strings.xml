@@ -10,4 +10,7 @@
     <string name="top_bar_title">TopBar</string>
     <string name="top_bar_left">VISIBLE</string>
     <string name="top_bar_right">GONE</string>
+    <string name="btn_music_rect">Music Rect</string>
+    <string name="btn_view_group">View Group</string>
+    <string name="text_view_content">ABCDEFG HIJKLMN OPQRST UVWXYZ</string>
 </resources>
