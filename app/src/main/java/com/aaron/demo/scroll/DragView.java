@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class DragView extends View {
 
@@ -70,15 +69,19 @@ public class DragView extends View {
 
                 // method 5，通过 ViewGroup.MarginLayoutParams 实现更加方便，
                 // 不必考虑父布局类型，和 method 4 的本质一样
-                ViewGroup.MarginLayoutParams layoutParams =
-                        (ViewGroup.MarginLayoutParams) getLayoutParams();
-                layoutParams.leftMargin = getLeft() + offsetX;
-                layoutParams.topMargin = getTop() + offsetY;
-                setLayoutParams(layoutParams);
+//                ViewGroup.MarginLayoutParams layoutParams =
+//                        (ViewGroup.MarginLayoutParams) getLayoutParams();
+//                layoutParams.leftMargin = getLeft() + offsetX;
+//                layoutParams.topMargin = getTop() + offsetY;
+//                setLayoutParams(layoutParams);
+
+                // method 6，scrollBy() 和 scrollTo()
+//                ((View) getParent()).scrollBy(-offsetX, -offsetY);
+                ((View) getParent()).scrollTo(-offsetX, -offsetY);
 
                 // 如果在执行完 ACTION_MOVE 后不重置初始坐标，会出现无法精准获取 View 偏移量
-                mLastX = rawX;
-                mLastY = rawY;
+//                mLastX = rawX;
+//                mLastY = rawY;
                 break;
         }
         return true;
