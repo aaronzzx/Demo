@@ -4,36 +4,49 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Scroller;
 
 public class DragView extends View {
 
     private static final String TAG = "DragView";
-
+    private Scroller mScroller;
     private int mLastX;
     private int mLastY;
 
     public DragView(Context context) {
         super(context);
+        mScroller = new Scroller(context);
     }
 
     public DragView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mScroller = new Scroller(context);
     }
 
     public DragView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        // 判断 Scroller 是否执行完毕
+        if (mScroller.computeScrollOffset()) {
+            // getCurrX() 和 getCurrY() 来获得当前的滑动坐标
+            ((View) getParent()).scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            // 通过重绘来不断调用 computeScroll，因为系在绘制 View 时会在 draw() 中调用
+            // 该方法，实际上就是使用 scrollTo() 方法
+            invalidate();
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int scrollX = ((View) getParent()).getScrollX();
-        int scrollY = ((View) getParent()).getScrollY();
-        Log.d(TAG, "scrollX: " + scrollX);
-        Log.d(TAG, "scrollY: " + scrollY);
+//        int scrollX = ((View) getParent()).getScrollX();
+//        int scrollY = ((View) getParent()).getScrollY();
 
         // method 1
         int x = (int) event.getX();
@@ -52,7 +65,6 @@ public class DragView extends View {
                 // method 2
 //                mLastX = rawX;
 //                mLastY = rawY;
-
                 break;
             case MotionEvent.ACTION_MOVE:
                 // method 1
@@ -87,12 +99,18 @@ public class DragView extends View {
 //                setLayoutParams(layoutParams);
 
                 // method 6，scrollBy() 和 scrollTo()
-//                ((View) getParent()).scrollBy(-offsetX, -offsetY);
-                ((View) getParent()).scrollTo(scrollX - offsetX, scrollY - offsetY);
+                ((View) getParent()).scrollBy(-offsetX, -offsetY);
+//                ((View) getParent()).scrollTo(scrollX - offsetX, scrollY - offsetY);
 
                 // 如果在执行完 ACTION_MOVE 后不重置初始坐标，会出现无法精准获取 View 偏移量
 //                mLastX = rawX;
 //                mLastY = rawY;
+                break;
+            case MotionEvent.ACTION_UP:
+                View viewGroup = (View) getParent();
+                mScroller.startScroll(viewGroup.getScrollX(), viewGroup.getScrollY(),
+                        -viewGroup.getScrollX(), -viewGroup.getScrollY(), 1000);
+                invalidate();
                 break;
         }
         return true;
