@@ -26,7 +26,8 @@
         <activity android:name=".custom_view.CustomViewActivity" />
         <activity android:name=".custom_view.CustomView2Activity" />
         <activity android:name=".custom_view.CustomView3Activity" />
-        <activity android:name=".scroll.ScrollActivity"></activity>
+        <activity android:name=".scroll.ScrollActivity" />
+        <activity android:name=".custom_view.MyCustomActivity"></activity>
     </application>
 
 </manifest>
