@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class DragView extends View {
+
+    private static final String TAG = "DragView";
 
     private int mLastX;
     private int mLastY;
@@ -27,32 +30,40 @@ public class DragView extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int scrollX = ((View) getParent()).getScrollX();
+        int scrollY = ((View) getParent()).getScrollY();
+        Log.d(TAG, "scrollX: " + scrollX);
+        Log.d(TAG, "scrollY: " + scrollY);
+
         // method 1
-//        int x = (int) event.getX();
-//        int y = (int) event.getY();
+        int x = (int) event.getX();
+        int y = (int) event.getY();
         // method 2
-        int rawX = (int) event.getRawX();
-        int rawY = (int) event.getRawY();
+//        int rawX = (int) event.getRawX();
+//        int rawY = (int) event.getRawY();
+//        Log.d(TAG, "rawX: " + rawX);
+//        Log.d(TAG, "rawY: " + rawY);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 // method 1
-//                mLastX = x;
-//                mLastY = y;
+                mLastX = x;
+                mLastY = y;
 
                 // method 2
-                mLastX = rawX;
-                mLastY = rawY;
+//                mLastX = rawX;
+//                mLastY = rawY;
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 // method 1
-//                int offsetX = x - mLastX;
-//                int offsetY = y - mLastY;
+                int offsetX = x - mLastX;
+                int offsetY = y - mLastY;
 //                layout(getLeft() + offsetX, getTop() + offsetY,
 //                        getRight() + offsetX, getBottom() + offsetY);
 
                 // method 2
-                int offsetX = rawX - mLastX;
-                int offsetY = rawY - mLastY;
+//                int offsetX = rawX - mLastX;
+//                int offsetY = rawY - mLastY;
 
                 // method 3,同时对上下或者左右进行偏移
 //                offsetLeftAndRight(offsetX);
@@ -77,7 +88,7 @@ public class DragView extends View {
 
                 // method 6，scrollBy() 和 scrollTo()
 //                ((View) getParent()).scrollBy(-offsetX, -offsetY);
-                ((View) getParent()).scrollTo(-offsetX, -offsetY);
+                ((View) getParent()).scrollTo(scrollX - offsetX, scrollY - offsetY);
 
                 // 如果在执行完 ACTION_MOVE 后不重置初始坐标，会出现无法精准获取 View 偏移量
 //                mLastX = rawX;
