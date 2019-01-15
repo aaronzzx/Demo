@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.aaron.demo.content_provider.ProviderActivity;
+import com.aaron.demo.custom_view.MyCustomActivity;
 import com.aaron.demo.database.DatabaseActivity;
 import com.aaron.demo.scroll.ScrollActivity;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(ProviderActivity.class);
                 break;
             case R.id.btn_custom_view: // 自定义View示例
-
+                startActivity(MyCustomActivity.class);
                 break;
             case R.id.btn_scroll: // Scroll示例
                 startActivity(ScrollActivity.class);
