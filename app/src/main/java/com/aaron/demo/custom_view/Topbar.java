@@ -13,18 +13,21 @@ import com.aaron.demo.R;
 
 public class Topbar extends RelativeLayout {
 
+    // TitleView
     private TextView mTitleView;
     private String mTitleText;
     private float mTitleTextSize;
     private int mTitleTextColor;
     private LayoutParams mTitleParams;
 
+    // LeftButton
     private Button mLeftButton;
     private String mLeftText;
     private int mLeftTextColor;
     private Drawable mLeftBackground;
     private LayoutParams mLeftParams;
 
+    // RightButton
     private Button mRightButton;
     private String mRightText;
     private int mRightTextColor;
@@ -40,6 +43,9 @@ public class Topbar extends RelativeLayout {
         initAttrs(context, attrs);
     }
 
+    /**
+     * 初始化控件值与布局属性
+     */
     private void initView(Context context) {
         // init view
         mTitleView = new TextView(context);
@@ -77,6 +83,9 @@ public class Topbar extends RelativeLayout {
         addView(mRightButton, mRightParams);
     }
 
+    /**
+     * 将 attrs 文件中声明的属性赋值给控件
+     */
     private void initAttrs(Context context, AttributeSet attrs) {
         // TopBar's attrs of title
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Topbar);
