@@ -49,22 +49,7 @@ public class Topbar extends RelativeLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//        setMeasuredDimension(measureValue(widthMeasureSpec), measureValue(heightMeasureSpec));
-    }
-
-    private int measureValue(int measureSpec) {
-        int result;
-        int measureMode = MeasureSpec.getMode(measureSpec);
-        int measureSize = MeasureSpec.getSize(measureSpec);
-        if (measureMode == MeasureSpec.EXACTLY) {
-            result = measureSize;
-        } else {
-            result = 150;
-            if (measureMode == MeasureSpec.AT_MOST) {
-                result = Math.min(measureSize, result);
-            }
-        }
-        return result;
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
     }
 
     /**
@@ -93,17 +78,19 @@ public class Topbar extends RelativeLayout {
         mRightButton.setBackground(mRightBackground);
 
         // 设置控件布局属性
-        mTitleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        mTitleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         mTitleParams.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
         // 添加到 ViewGroup
         addView(mTitleView, mTitleParams);
 
-        mLeftParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        mLeftParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         mLeftParams.addRule(RelativeLayout.ALIGN_PARENT_START, TRUE);
+        mLeftParams.addRule(RelativeLayout.CENTER_VERTICAL, TRUE);
         addView(mLeftButton, mLeftParams);
 
-        mRightParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        mRightParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         mRightParams.addRule(RelativeLayout.ALIGN_PARENT_END, TRUE);
+        mRightParams.addRule(RelativeLayout.CENTER_VERTICAL, TRUE);
         addView(mRightButton, mRightParams);
     }
 
