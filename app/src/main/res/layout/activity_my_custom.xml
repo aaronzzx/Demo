@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,5 +22,16 @@
         android:text="@string/btn_custom_view"
         android:textSize="26sp"
         android:textStyle="bold"/>
+
+    <com.aaron.demo.custom_view.Topbar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4671d6"
+        app:leftBackground="@color/colorAccent"
+        app:leftText="@string/top_bar_left"
+        app:rightBackground="@color/colorAccent"
+        app:rightText="@string/top_bar_right"
+        app:titleText="@string/top_bar_title" />
 
 </LinearLayout>

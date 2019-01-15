@@ -7,14 +7,16 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.aaron.demo.R;
 
 public class Topbar extends RelativeLayout {
 
+    private static final String TAG = "Topbar";
+    private OnTopbarClickListener mListener;
+
     // TitleView
-    private TextView mTitleView;
+    private ShaderTextView mTitleView;
     private String mTitleText;
     private float mTitleTextSize;
     private int mTitleTextColor;
@@ -41,6 +43,28 @@ public class Topbar extends RelativeLayout {
     public Topbar(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttrs(context, attrs);
+        initView(context);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        setMeasuredDimension(measureValue(widthMeasureSpec), measureValue(heightMeasureSpec));
+    }
+
+    private int measureValue(int measureSpec) {
+        int result;
+        int measureMode = MeasureSpec.getMode(measureSpec);
+        int measureSize = MeasureSpec.getSize(measureSpec);
+        if (measureMode == MeasureSpec.EXACTLY) {
+            result = measureSize;
+        } else {
+            result = 150;
+            if (measureMode == MeasureSpec.AT_MOST) {
+                result = Math.min(measureSize, result);
+            }
+        }
+        return result;
     }
 
     /**
@@ -48,7 +72,7 @@ public class Topbar extends RelativeLayout {
      */
     private void initView(Context context) {
         // init view
-        mTitleView = new TextView(context);
+        mTitleView = new ShaderTextView(context);
         mLeftButton = new Button(context);
         mRightButton = new Button(context);
 
@@ -90,7 +114,7 @@ public class Topbar extends RelativeLayout {
         // TopBar's attrs of title
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Topbar);
         mTitleText = typedArray.getString(R.styleable.Topbar_titleText);
-        mTitleTextSize = typedArray.getDimension(R.styleable.Topbar_titleTextSize, 18);
+        mTitleTextSize = typedArray.getDimension(R.styleable.Topbar_titleTextSize, 24);
         mTitleTextColor = typedArray.getColor(R.styleable.Topbar_titleTextColor, 0xFFFFFFFF);
 
         // TopBar's attrs of leftButton
@@ -105,5 +129,32 @@ public class Topbar extends RelativeLayout {
 
         // 释放资源
         typedArray.recycle();
+    }
+
+    public void hideTitleView() {
+        mTitleView.setVisibility(GONE);
+    }
+
+    public void showTitleView() {
+        mTitleView.setVisibility(VISIBLE);
+    }
+
+    public void setOnTopbarClickListener(OnTopbarClickListener listener) {
+        if (mListener == null) {
+            mListener = listener;
+        }
+        mLeftButton.setOnClickListener(v -> {
+            mListener.leftClick("你点击了 LeftButton");
+        });
+        mRightButton.setOnClickListener(v -> {
+            mListener.rightClick("你点击了 RightButton");
+        });
+    }
+
+    public interface OnTopbarClickListener {
+
+        void leftClick(String msg);
+
+        void rightClick(String msg);
     }
 }
