@@ -22,11 +22,14 @@ public class MyView extends View {
     public boolean dispatchTouchEvent(MotionEvent event) {
         Log.d(TAG, "dispatchTouchEvent: " + event.getAction());
         return super.dispatchTouchEvent(event);
+//        return true;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(TAG, "onTouchEvent: " + event.getAction());
         return super.onTouchEvent(event);
+//        return true;
+//        return false;
     }
 }

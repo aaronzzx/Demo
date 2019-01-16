@@ -22,18 +22,22 @@ public class MyViewGroupB extends RelativeLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(TAG, "dispatchTouchEvent: " + ev.getAction());
         return super.dispatchTouchEvent(ev);
+//        return true;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d(TAG, "onInterceptTouchEvent: " + ev.getAction());
         return super.onInterceptTouchEvent(ev);
+//        return true;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(TAG, "onTouchEvent: " + event.getAction());
         return super.onTouchEvent(event);
+//        return true;
+//        return false;
     }
 
     @Override
