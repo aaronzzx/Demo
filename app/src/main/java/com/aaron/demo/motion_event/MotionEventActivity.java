@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import com.aaron.demo.R;
 
+/**
+ * 学习 MotionEvent
+ */
 public class MotionEventActivity extends AppCompatActivity {
 
     private static final String TAG = "MotionEventActivity";

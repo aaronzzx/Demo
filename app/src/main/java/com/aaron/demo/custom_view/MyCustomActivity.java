@@ -6,6 +6,9 @@ import android.widget.Toast;
 
 import com.aaron.demo.R;
 
+/**
+ * 学习自定义 View
+ */
 public class MyCustomActivity extends AppCompatActivity {
 
     @Override

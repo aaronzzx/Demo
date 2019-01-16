@@ -12,6 +12,9 @@ import com.aaron.demo.database.DatabaseActivity;
 import com.aaron.demo.motion_event.MotionEventActivity;
 import com.aaron.demo.scroll.ScrollActivity;
 
+/**
+ * 程序入口
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mDatabase_btn, mContentProvider, mCustomView, mMotionEvent, mScrollView;

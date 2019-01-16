@@ -23,6 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 学习 SQLite 数据库
+ */
 public class DatabaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     // 控件

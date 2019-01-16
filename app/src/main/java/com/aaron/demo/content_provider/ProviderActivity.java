@@ -18,6 +18,9 @@ import com.aaron.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 学习 ContentProvider
+ */
 public class ProviderActivity extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSION = 1;

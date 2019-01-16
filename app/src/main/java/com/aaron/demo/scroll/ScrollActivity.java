@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.aaron.demo.R;
 
+/**
+ * 学习 Scroll
+ */
 public class ScrollActivity extends AppCompatActivity {
 
     @Override
