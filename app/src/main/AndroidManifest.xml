@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".motion_event.MotionEventActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +28,7 @@
         <activity android:name=".custom_view.CustomView2Activity" />
         <activity android:name=".custom_view.CustomView3Activity" />
         <activity android:name=".scroll.ScrollActivity" />
-        <activity android:name=".custom_view.MyCustomActivity"></activity>
+        <activity android:name=".custom_view.MyCustomActivity" />
     </application>
 
 </manifest>
