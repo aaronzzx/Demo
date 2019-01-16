@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.aaron.demo.motion_event.MyViewGroupA xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_group_a"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".motion_event.MotionEventActivity">
+    android:background="#0288D1">
 
-</android.support.constraint.ConstraintLayout>
+    <com.aaron.demo.motion_event.MyViewGroupB
+        android:id="@+id/view_group_b"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_above="@id/view_group_a"
+        android:background="#F57C00">
+
+        <com.aaron.demo.motion_event.MyView
+            android:id="@+id/view"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_above="@id/view_group_b"
+            android:background="#FF8A80" />
+
+    </com.aaron.demo.motion_event.MyViewGroupB>
+
+</com.aaron.demo.motion_event.MyViewGroupA>
