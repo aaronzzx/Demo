@@ -2,6 +2,9 @@
     <string name="app_name">Demo</string>
     <string name="btn_database">数据库示例</string>
     <string name="btn_content_provider">内容提供器示例</string>
+    <string name="btn_read_contacts">读取联系人</string>
+    <string name="btn_read_messages">读取短信</string>
+    <string name="btn_clear_list">清除列表</string>
     <string name="btn_custom_view">自定义控件</string>
     <string name="btn_motion_event">Motion Event</string>
     <string name="btn_scroll">Scroll示例</string>

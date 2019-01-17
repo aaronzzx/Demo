@@ -4,6 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_read_contacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_read_contacts" />
+
+        <Button
+            android:id="@+id/btn_read_messages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_read_messages" />
+
+        <Button
+            android:id="@+id/btn_clear_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_clear_list" />
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
