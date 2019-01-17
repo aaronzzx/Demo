@@ -9,6 +9,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+/**
+ * 可拖动并且根据拖动距离决定是否固定的 View
+ * Power by ViewDragHelper
+ */
 public class DragLayout extends LinearLayout {
 
     private ViewDragHelper mViewDragHelper;
