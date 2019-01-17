@@ -9,4 +9,15 @@
         android:layout_height="100dp"
         android:background="#000"/>
 
+    <com.aaron.demo.scroll.DragLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#FF8A80" />
+
+    </com.aaron.demo.scroll.DragLayout>
+
 </LinearLayout>
