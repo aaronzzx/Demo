@@ -29,8 +29,6 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "ProviderActivity";
     private static final int REQUEST_PERMISSION = 1;
-    private static final int READ_CONTACTS = 11;
-    private static final int READ_MESSAGES = 12;
     private BaseAdapter mAdapter;
     private List<String> mStringList = new ArrayList<>();
 
@@ -39,16 +37,17 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
         initView();
+        checkPermission();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_read_contacts:
-                checkPermission(Manifest.permission.READ_CONTACTS, READ_CONTACTS);
+                readContacts();
                 break;
             case R.id.btn_read_messages:
-                checkPermission(Manifest.permission.READ_SMS, READ_MESSAGES);
+                readMessages();
                 break;
             case R.id.btn_clear_list:
                 mStringList.clear();
@@ -69,19 +68,16 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
         listView.setAdapter(mAdapter);
     }
 
-    private void checkPermission(String permission, int type) {
+    private void checkPermission() {
         // 检查权限
-        if (ContextCompat.checkSelfPermission(this, permission)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
             // 申请权限
             ActivityCompat.requestPermissions(this,
-                    new String[]{permission}, REQUEST_PERMISSION);
-        } else {
-            if (type == READ_CONTACTS) {
-                readContacts();
-            } else if (type == READ_MESSAGES) {
-                readMessages();
-            }
+                    new String[]{Manifest.permission.READ_CONTACTS,
+                            Manifest.permission.READ_SMS}, REQUEST_PERMISSION);
         }
     }
 
@@ -91,12 +87,10 @@ public class ProviderActivity extends AppCompatActivity implements View.OnClickL
         switch (requestCode) {
             case REQUEST_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0]
-                        == PackageManager.PERMISSION_GRANTED) {
-//                    if (permissions[0].equals(Manifest.permission.READ_CONTACTS)) {
-//                        readContacts();
-//                    } else if (permissions[0].equals(Manifest.permission.READ_SMS)) {
-//                        readMessages();
-//                    }
+                        == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(ProviderActivity.this, "准备就绪",
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ProviderActivity.this, "请先打开权限",
                             Toast.LENGTH_SHORT).show();
