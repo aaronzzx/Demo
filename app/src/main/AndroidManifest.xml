@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".motion_event.MotionEventActivity"></activity>
+        <activity android:name=".xml_paint.XmlPaintActivity"></activity>
+        <activity android:name=".motion_event.MotionEventActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

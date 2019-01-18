@@ -11,13 +11,15 @@ import com.aaron.demo.custom_view.MyCustomActivity;
 import com.aaron.demo.database.DatabaseActivity;
 import com.aaron.demo.motion_event.MotionEventActivity;
 import com.aaron.demo.scroll.ScrollActivity;
+import com.aaron.demo.xml_paint.XmlPaintActivity;
 
 /**
  * 程序入口
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mDatabase_btn, mContentProvider, mCustomView, mMotionEvent, mScrollView;
+    private Button mDatabase_btn, mContentProvider, mCustomView,
+            mMotionEvent, mScrollView, mXmlPaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_scroll: // Scroll示例
                 startActivity(ScrollActivity.class);
                 break;
+            case R.id.btn_xml_paint: // Xml绘图
+                startActivity(XmlPaintActivity.class);
+                break;
         }
     }
 
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCustomView = findViewById(R.id.btn_custom_view);
         mMotionEvent = findViewById(R.id.btn_motion_event);
         mScrollView = findViewById(R.id.btn_scroll);
+        mXmlPaint = findViewById(R.id.btn_xml_paint);
     }
 
     private void setClickListener() {
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCustomView.setOnClickListener(this);
         mMotionEvent.setOnClickListener(this);
         mScrollView.setOnClickListener(this);
+        mXmlPaint.setOnClickListener(this);
     }
 
     private void startActivity(Class clazz) {
