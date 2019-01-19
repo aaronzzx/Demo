@@ -25,8 +25,8 @@ public class XmlPaintActivity extends AppCompatActivity implements SeekBar.OnSee
     private Bitmap mBitmap;
     private static final int[] mImgArray = {R.drawable.img_1, R.drawable.img_2,
             R.drawable.img_3, R.drawable.img_4, R.drawable.img_5, R.drawable.img_6,
-            R.drawable.img_8, R.drawable.img_9, R.drawable.img_10, R.drawable.img_11,
-            R.drawable.img_12, R.drawable.img_13};
+            R.drawable.img_7, R.drawable.img_8, R.drawable.img_9, R.drawable.img_10,
+            R.drawable.img_11, R.drawable.img_12, R.drawable.img_13};
     private SeekBar mHueSeekBar;
     private SeekBar mSaturationSeekBar;
     private SeekBar mLumSeekBar;
@@ -42,6 +42,9 @@ public class XmlPaintActivity extends AppCompatActivity implements SeekBar.OnSee
         initView();
     }
 
+    /**
+     * 透明状态栏，并使布局融入状态栏
+     */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
