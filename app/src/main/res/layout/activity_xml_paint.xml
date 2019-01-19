@@ -15,14 +15,14 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         android:scaleType="centerCrop" />
 
     <SeekBar
         android:id="@+id/seek_hue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:max="100"
         android:padding="10dp"
         android:progress="50" />
